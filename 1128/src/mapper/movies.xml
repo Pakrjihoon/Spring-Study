@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movies">
+
+	<select id="selectList" resultType="Movie" parameterType="map">
+		SELECT
+		no, name, director,
+		endDate, releaseDate, audienceNum, genreName
+		FROM(SELECT no, name, director, endDate, releaseDate, audienceNum,
+		genreName,
+		rownum r
+		FROM(SELECT m.no, m.name, director, end_date
+		endDate, release_date releaseDate,
+		audience_num audienceNum, g.name
+		genreName
+		FROM movies m, genres g
+		WHERE m.genre = g.no
+		ORDER BY 1))
+		WHERE
+		r BETWEEN #{start} AND #{end}
+	</select>
+	<select id="selectTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM movies
+	</select>
+	
+	<select id="selectMoviesByGenre" resultType="Movie" parameterType="int">
+		select no,name,director,release_date releaseDate,end_date
+		endDate,director,audience_num audienceNum,genre
+		FROM movies
+		WHERE genre = #{no}
+		ORDER BY 1
+	</select>
+</mapper>  

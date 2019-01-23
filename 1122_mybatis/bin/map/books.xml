@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="books">
+ <insert id="insertBook" parameterType="vo.Book"> 
+ 	INSERT INTO books(no, title, image, author, publication_date)
+	VALUES(books_seq.nextval, #{title}, #{image}, #{author}, #{publicationDate})
+</insert>
+<select id="selectList" resultType="vo.Book">
+	SELECT no, title, image, author, publication_date publicationDate
+	FROM books
+</select>
+<delete id="delete" parameterType="int">
+	DELETE 
+	FROM books
+	where no=#{no}
+</delete>
+<update id="updateTitle" parameterType="vo.Book">
+	UPDATE books
+	SET title=#{title}
+	WHERE no=#{no}
+</update>
+</mapper> 
+

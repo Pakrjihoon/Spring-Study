@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<!-- 커넥션풀 설정이 spring으로 -->
+	
+	<!-- 맵퍼 경로 설정 -->
+	<mappers>
+		<mapper resource="map/books.xml"/>
+		<mapper resource="map/idols.xml"/>
+	</mappers>
+	
+</configuration>
+
+

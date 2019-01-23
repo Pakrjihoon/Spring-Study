@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<!-- null 입력 허용 -->
+	<settings>
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings>
+    <typeAliases>
+    	<typeAlias type="vo.User" alias="User"/>
+    	<typeAlias type="vo.Genre" alias="Genre"/>
+    	<typeAlias type="vo.Movie" alias="Movie"/>
+    	<typeAlias type="vo.PageVO" alias="PageVO"/>
+    </typeAliases> 
+	<mappers>
+		<mapper resource="mapper/users.xml"/>
+		<mapper resource="mapper/genres.xml"/>
+		<mapper resource="mapper/movies.xml"/>
+	</mappers>
+</configuration>
+
+
+
+
+
+
+
+

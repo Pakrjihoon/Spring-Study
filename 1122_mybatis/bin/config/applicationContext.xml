@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Connection Pool 설정 -->
+	<bean
+	id="dataSource" 
+	p:url="jdbc:oracle:thin:@localhost:1521:xe"
+	p:username="test"
+	p:password="1111"
+	p:driverClassName="oracle.jdbc.OracleDriver"
+	class="org.springframework.jdbc.datasource.DriverManagerDataSource"/>
+	
+	<!-- SqlSessionFactory 설정 
+		p:dataSource-ref : 커넥션풀 의존성 주입
+		p:configLocation : mybatis-config.xml 경로 설정
+	-->
+	<bean
+	id="sqlSessionFactory"
+	p:configLocation="config/mybatis-config.xml"
+	p:dataSource-ref="dataSource"
+	class="org.mybatis.spring.SqlSessionFactoryBean"/>
+	
+	<!-- SqlSession 설정 -->
+	<bean 
+	id="sqlSession"
+	c:sqlSessionFactory-ref="sqlSessionFactory"
+	class="org.mybatis.spring.SqlSessionTemplate"/>
+	
+	<!-- DAO 설정 -->
+	<bean
+	id="booksDAO" 
+	p:session-ref="sqlSession"
+	class="dao.BooksDAOImpl"/>
+	
+	<bean 
+	id="idolsDAO"
+	p:session-ref="sqlSession"
+	class="dao.IdolsDAOImpl"/>
+	
+	<!-- Service 설정 -->
+	<bean 
+	id="booksService"
+	p:booksDAO-ref="booksDAO"
+	class="service.BooksServiceImpl"/>
+	<bean
+	id="idolsService"
+	p:idolsDAO-ref = "idolsDAO"
+	class="service.IdolsServiceImpl"/>
+	
+</beans>

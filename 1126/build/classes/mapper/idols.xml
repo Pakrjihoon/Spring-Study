@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idols">
+	<select id="selectList" resultType="Idol">
+		SELECT IDOL_ID idolId, NAME, HEIGHT, WEIGHT, BIRTH_DATE birthDate, AGENT_NAME agentName, GENDER, GROUP_ID groupId
+		FROM idols
+	</select>
+	<select id="selectOne" resultType="Idol">
+		SELECT IDOL_ID idolId, NAME, HEIGHT, WEIGHT, BIRTH_DATE birthDate, AGENT_NAME agentName, GENDER, GROUP_ID groupId
+		FROM idols
+		WHERE idol_id = #{idolId}
+	</select>
+</mapper> 
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idols">
+	<select id="selectList" resultType="vo.Idol">
+		SELECT IDOL_ID idolId, NAME, HEIGHT,WEIGHT,	BIRTH_DATE birthDate, AGENT_NAME agentName, GENDER,	GROUP_ID groupId
+		FROM Idols	
+	</select>
+	<insert id="insert" parameterType="vo.Idol">
+		INSERT INTO idols(IDOL_ID,NAME,HEIGHT,WEIGHT,BIRTH_DATE,AGENT_NAME,GENDER,GROUP_ID)
+		VALUES(idols_seq.nextval, #{name}, #{height}, #{weight}, #{birthDate}, #{agentName}, #{gender}, #{groupId})
+	</insert>
+</mapper> 
+

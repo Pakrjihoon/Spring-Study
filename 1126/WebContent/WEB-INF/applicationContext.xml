@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- WAS가 생성한 커넥션풀을 JNDI로 찾음 -->
+	<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/oraclexe"></jee:jndi-lookup>
+	
+	<!-- SqlSessionFactory 설정 
+		p:dataSource-ref : 커넥션풀 의존성 주입
+		p:configLocation : mybatis-config.xml 경로 설정
+	-->
+	<bean
+	id="sqlSessionFactory"
+	p:configLocation="/WEB-INF/mybatis-config.xml"
+	p:dataSource-ref="dataSource"
+	class="org.mybatis.spring.SqlSessionFactoryBean"/>
+	
+	<!-- SqlSession 설정 -->
+	<bean 
+	id="sqlSession"
+	c:sqlSessionFactory-ref="sqlSessionFactory"
+	class="org.mybatis.spring.SqlSessionTemplate"/>
+	
+	
+	<!-- DAO -->
+	<bean
+	id="groupsDAO"  
+	p:session-ref="sqlSession" 
+	class="dao.GroupsDAOImpl"/>
+	<bean
+	id="idolsDAO"
+	p:session-ref="sqlSession"
+	class="dao.IdolsDAOImpl"/>
+	
+	<!-- Service -->
+	<bean
+	id="groupsService" 
+	p:groupsDAO-ref="groupsDAO" 
+	class="service.GroupsServiceImpl"/>
+	<bean
+	id="idolsService"
+	p:idolDAO-ref="idolsDAO"
+	class="service.IdolsServiceImpl"/>
+</beans>

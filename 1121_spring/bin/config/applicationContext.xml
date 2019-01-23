@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+<!-- 인자 3개짜리 생성자 호출하여 빈 생성 -->
+	<bean id="idol1" class="vo.Idol">
+		<constructor-arg value="1"></constructor-arg>
+		<constructor-arg value="26"></constructor-arg>
+		<constructor-arg value="송민호"></constructor-arg>
+	</bean>
+	
+	<!-- setter를 호출하여 멤버필드의 값 설정 -->
+	<bean id="idol2" class="vo.Idol">
+		<property name="no" value="2"/>
+		<property name="age" value="20"/>
+		<property name="name" value="황동현"/>
+	</bean>
+	<!-- 
+		Idol idol2 = new Idol();
+		idol2.setNo(1);
+		idol2.setAge(20);
+		idol2.setName("황동현");
+		과 같은 코드
+	 -->
+	 <!-- 축약 -->
+	 <bean p:age="23" p:name="박지훈" p:no="3" id="idol3" class="vo.Idol"/>
+</beans>

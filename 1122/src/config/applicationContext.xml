@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- book빈 생성 -->
+	<bean p:no="2" p:title="새들은 페루에 가서 죽다" p:author="로맹 가리" id="book" class="vo.Book"/>
+	
+	<bean p:no="1" p:title="역사의역사" p:author="유시민"  id="book1" class="vo.Book"/>
+	
+	<!-- DI (의존성 주입) -->
+	<!-- setter를 이용해서 의존성을 주입함
+		이렇게 bean간의 의존성을 설정하는 것을
+		bean wiring (한글로 빈 묶기) 라고 함. -->
+	<bean p:book-ref="book" id="printer" class="util.BookPrinterKOR"/>
+</beans>
